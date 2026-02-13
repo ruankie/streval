@@ -41,40 +41,40 @@ uv run pytest --cov=src
 
 Documentation is built using MkDocs.
 
-To build the static site:
+- To build the static site:
 
-```bash
-uv run mkdocs build
-```
+    ```bash
+    uv run mkdocs build
+    ```
 
-To serve the documentation locally:
+- To serve the documentation locally:
 
-```bash
-uv run mkdocs serve
-```
+    ```bash
+    uv run mkdocs serve
+    ```
 
-Publish docs to GitHub Pages:
+- Publish docs to GitHub Pages:
 
-```bash
-uv run mkdocs gh-deploy
-```
+    ```bash
+    uv run mkdocs gh-deploy
+    ```
 
 ## Publish to PyPi
 
 1. Bump version (e.g. minor bump):
 
-```bash
-uv version --bump minor
-```
+    ```bash
+    uv version --bump minor
+    ```
 
 1. Build source distribution
 
-```bash
-uv build
-```
+    ```bash
+    uv build
+    ```
 
 1. Publish to PyPi
 
-```bash
-uv publish
-```
+    ```bash
+    uv publish
+    ```
