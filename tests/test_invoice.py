@@ -42,19 +42,19 @@ def test_invoice_evaluation():
     print(json.dumps(results, indent=4))
 
     print("\n===== STREVAL INVOICE RESULTS =====")
-    print(f"Field Accuracy:  {results['field_accuracy']:.4f}")
-    print(f"Object Accuracy: {results['object_accuracy']:.4f}")
+    print(f"Avg field-level Accuracy:  {results['avg_field_accuracy']:.4f}")
+    print(f"Avg object-level Accuracy: {results['avg_object_accuracy']:.4f}")
     print(f"Total Fields Compared: {results['total_fields_compared']}")
-    print(f"Total Predictions: {results['total_predictions']}\n")
+    print(f"Number of samples: {results['nb_samples']}\n")
 
-    print("Per-field Accuracy:")
+    print("Field-level Accuracy:")
     for field, acc in sorted(results["per_field_accuracy"].items()):
         print(f"  {field}: {acc:.4f}")
 
     print("\n====================================\n")
 
     # Minimal assertion so pytest doesn't complain
-    assert results["total_predictions"] == len(predictions)
+    assert results["nb_samples"] == len(predictions)
 
 if __name__ == "__main__":
     test_invoice_evaluation()

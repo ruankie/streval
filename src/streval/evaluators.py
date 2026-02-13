@@ -65,12 +65,11 @@ class StructuredExtractionEvaluator:
         }
 
         return {
-            "field_accuracy": field_accuracy,
-            "object_accuracy": object_accuracy,
+            "avg_field_accuracy": field_accuracy,
+            "avg_object_accuracy": object_accuracy,
             "total_fields_compared": total_fields,
-            "total_predictions": len(predictions),
+            "nb_samples": len(predictions),
             "per_field_accuracy": per_field_accuracy,
-            "detailed_results": all_results,  # useful for debugging
         }
 
     # -------------------------
