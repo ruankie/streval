@@ -50,13 +50,9 @@ class StructuredExtractionEvaluator:
                 per_field_counts[path]["correct"] += int(is_correct)
                 per_field_counts[path]["total"] += 1
 
-        field_accuracy = (
-            total_correct / total_fields if total_fields > 0 else 0.0
-        )
+        field_accuracy = total_correct / total_fields if total_fields > 0 else 0.0
         object_accuracy = (
-            object_exact_matches / len(predictions)
-            if predictions
-            else 0.0
+            object_exact_matches / len(predictions) if predictions else 0.0
         )
 
         per_field_accuracy = {
