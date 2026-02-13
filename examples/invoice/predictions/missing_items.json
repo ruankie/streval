@@ -1,0 +1,14 @@
+{
+  "invoice_number": "INV-2024-001",
+  "invoice_date": "2024-11-03",
+  "vendor_name": "ACME Corporation",
+  "total_amount": 517.5,
+  "currency": "USD",
+  "line_items": [
+    {
+      "description": "Peas",
+      "quantity": 2,
+      "unit_price": 150.0
+    }
+  ]
+}

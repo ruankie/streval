@@ -2,18 +2,18 @@
   "invoice_number": "INV-2024-002",
   "invoice_date": "2024-11-03",
   "vendor_name": "ACME",
-  "total_amount": 510.1,
-  "currency": "USD",
+  "total_amount": 517.50,
+  "currency": "AUD",
   "line_items": [
     {
       "description": "Peas",
-      "quantity": 1,
+      "quantity": 2,
       "unit_price": 150.0
     },
     {
-      "description": "Carrots",
+      "description": "Car",
       "quantity": 2,
-      "unit_price": 150.0
+      "unit_price": 90.0
     }
   ]
 }

@@ -1,0 +1,19 @@
+{
+  "invoice_number": "INV-1111-111",
+  "invoice_date": "2024-11-11",
+  "vendor_name": "Corp",
+  "total_amount": 123.1,
+  "currency": "EUR",
+  "line_items": [
+    {
+      "description": "Item 1",
+      "quantity": 12,
+      "unit_price": 123.1
+    },
+    {
+      "description": "Item 2",
+      "quantity": 2,
+      "unit_price": 90.0
+    }
+  ]
+}
