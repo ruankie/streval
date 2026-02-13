@@ -7,8 +7,8 @@ It allows you to **compare predicted structured objects** (Python dicts or Pydan
 ## Key Features
 
 * Strict matching only (binary comparison):  
-    * Cheap, fast, deterministic, and simple  
-    * Currently **no fuzzy matching**; a field is either correct or incorrect  
+  * Cheap, fast, deterministic, and simple  
+  * Currently **no fuzzy matching**; a field is either correct or incorrect  
 * Provides **field-level accuracy**: average correctness across all fields and a per-field accuracy breakdown  
 * Provides **object-level accuracy**: shows how many predictions are exact matches to the ground truth  
 * Penalizes **missing fields** in the prediction  
@@ -51,4 +51,24 @@ To serve the documentation locally:
 
 ```bash
 uv run mkdocs serve
+```
+
+## Publish to PyPi
+
+1. Bump version (e.g. minor bump):
+
+```bash
+uv version --bump minor
+```
+
+1. Build source distribution
+
+```bash
+uv build
+```
+
+1. Publish to PyPi
+
+```bash
+uv publish
 ```
