@@ -53,6 +53,12 @@ To serve the documentation locally:
 uv run mkdocs serve
 ```
 
+Publish docs to GitHub Pages:
+
+```bash
+uv run mkdocs gh-deploy
+```
+
 ## Publish to PyPi
 
 1. Bump version (e.g. minor bump):
