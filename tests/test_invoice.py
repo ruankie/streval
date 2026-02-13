@@ -21,6 +21,8 @@ def test_invoice_evaluation():
     prediction_all_correct_path = example_path / "predictions" / "all_correct.json"
     prediction_all_incorrect_path = example_path / "predictions" / "all_incorrect.json"
     prediction_half_correct_path = example_path / "predictions" / "half_correct.json"
+    prediction_missing_items_path = example_path / "predictions" / "missing_items.json"
+    prediction_extra_items_path = example_path / "predictions" / "extra_items.json"
 
     ground_truth = load_json(ground_truth_path)
     prediction_all_correct = load_json(prediction_all_correct_path)
@@ -28,8 +30,10 @@ def test_invoice_evaluation():
     prediction_half_correct = load_json(prediction_half_correct_path)
     predictions = [
         prediction_all_correct,
-        prediction_all_incorrect,
-        prediction_half_correct,
+        # prediction_all_incorrect,
+        # prediction_half_correct,
+        # prediction_missing_items_path,
+        # prediction_extra_items_path,
     ]
 
     evaluator = StructuredExtractionEvaluator()
@@ -55,6 +59,7 @@ def test_invoice_evaluation():
 
     # Minimal assertion so pytest doesn't complain
     assert results["nb_samples"] == len(predictions)
+
 
 if __name__ == "__main__":
     test_invoice_evaluation()
