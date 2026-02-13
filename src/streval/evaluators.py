@@ -15,8 +15,19 @@ class StructuredExtractionEvaluator:
         ground_truth: Union[Dict, BaseModel],
         predictions: List[Union[Dict, BaseModel]],
     ) -> Dict[str, Any]:
-        """
-        Evaluate multiple predictions against a single ground truth object.
+        """Evaluate multiple predictions against a single ground truth object.
+
+        Args:
+            ground_truth (Union[Dict, BaseModel]): The ground truth object.
+            predictions (List[Union[Dict, BaseModel]]): The list of prediction objects.
+
+        Returns:
+            Dict[str, Any]: The evaluation results, including:
+                - nb_samples (int): The number of samples evaluated.
+                - total_fields_compared (int): The total number of fields compared.
+                - avg_field_accuracy (float): The average field accuracy.
+                - avg_object_accuracy (float): The average object accuracy.
+                - per_field_accuracy (Dict[str, float]): The per-field accuracy.
         """
 
         gt_dict = self._to_dict(ground_truth)

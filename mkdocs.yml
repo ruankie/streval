@@ -1,0 +1,23 @@
+site_name: Streval
+repo_url: "https://github.com/ruankie/streval"
+repo_name: "ruankie/streval"
+
+nav:
+  - Home: index.md
+  - Getting Started: getting_started.md
+  - Reference: reference.md
+
+theme:
+  name: material
+  features:
+    - tabs
+    - navigation.expand
+    - navigation.sections
+
+plugins:
+  - mkdocstrings
+
+markdown_extensions:
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
