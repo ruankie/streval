@@ -1,6 +1,6 @@
 [project]
 name = "streval"
-version = "0.1.1"
+version = "0.1.2"
 description = "Tool for evaluating structured outputs"
 readme = "README.md"
 authors = [
@@ -25,3 +25,9 @@ dev = [
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/ruankie/streval"
+Documentation = "https://ruankie.github.io/streval/"
+Repository = "https://github.com/ruankie/streval"
+Issues = "https://github.com/ruankie/streval/issues"
