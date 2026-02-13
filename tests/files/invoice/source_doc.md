@@ -1,6 +1,6 @@
 # ACME Corporation
 
-**INVOICE**
+INVOICE
 
 Invoice Number: INV-2024-001  
 Date Issued: 2024-11-03  
