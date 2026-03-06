@@ -10,6 +10,8 @@ nav:
 
 theme:
   name: material
+  logo: img/logo_sq_white_no_bg.png
+  favicon: img/favicon.ico
   features:
     - tabs
     - navigation.expand
@@ -22,3 +24,6 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+
+extra_css:
+  - stylesheets/extra.css

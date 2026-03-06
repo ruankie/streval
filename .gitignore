@@ -14,3 +14,6 @@ wheels/
 
 # Mkdocs site
 /site/
+
+# Mac stuff
+**.DS_Store
