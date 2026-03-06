@@ -18,27 +18,37 @@ pip install streval
     ```py
     from streval.evaluators import StructuredExtractionEvaluator
 
-    # Ground truth
-    ground_truth = {
+    # Ground truths
+    ## Invoice 1
+    gt1 = {
         "invoice_number": "INV-001",
         "summary": {
             "total_amount": 100.0,
         },
     }
 
+    ## Invoice 2
+    gt2 = {
+        "invoice_number": "INV-002",
+        "summary": {
+            "total_amount": 200.0,
+        },
+    }
+
     # Predictions
-    predictions = [
-        {"invoice_number": "INV-001", "summary": {"total_amount": 100.0}},  # Correct
-        {"invoice_number": "001", "summary": {"total_amount": 50.0}},  # Incorrect
-    ]
+    ## Invoice 1 (correct)
+    p1 = {"invoice_number": "INV-001", "summary": {"total_amount": 100.0}}
+
+    ## Invoice 2 (incorrect)
+    p2 = {"invoice_number": "INV-001", "summary": {"total_amount": 100.0}}
 
     # Initialize evaluator
     evaluator = StructuredExtractionEvaluator()
 
     # Run evaluation
     results = evaluator.evaluate(
-        ground_truth=ground_truth,
-        predictions=predictions,
+        ground_truths=[gt1, gt2],
+        predictions=[p1, p2],
     )
     ```
 
@@ -58,27 +68,33 @@ pip install streval
         summary: SpendSummary
 
 
-    # Ground truth
-    ground_truth = Invoice(
+    # Ground truths
+    ## Invoice 1
+    gt1 = Invoice(
         invoice_number="INV-001",
         summary=SpendSummary(total_amount=100.0),
     )
 
+    ## Invoice 2
+    gt2 = Invoice(
+        invoice_number="INV-002",
+        summary=SpendSummary(total_amount=200.0),
+    )
+
     # Predictions
-    predictions = [
-        Invoice(
-            invoice_number="INV-001", summary=SpendSummary(total_amount=100.0)
-        ),  # Correct
-        Invoice(invoice_number="001", summary=SpendSummary(total_amount=50.0)),  # Incorrect
-    ]
+    ## Invoice 1 (correct)
+    p1 = Invoice(invoice_number="INV-001", summary=SpendSummary(total_amount=100.0))
+
+    ## Invoice 2 (incorrect)
+    p2 = Invoice(invoice_number="001", summary=SpendSummary(total_amount=50.0))
 
     # Initialize evaluator
     evaluator = StructuredExtractionEvaluator()
 
     # Run evaluation
     results = evaluator.evaluate(
-        ground_truth=ground_truth,
-        predictions=predictions,
+        ground_truths=[gt1, gt2],
+        predictions=[p1, p2],
     )
     ```
 
@@ -88,8 +104,8 @@ pip install streval
 {
     "avg_field_accuracy": 0.5,
     "avg_object_accuracy": 0.5,
-    "total_fields_compared": 4,
     "nb_samples": 2,
+    "total_fields_compared": 4,
     "per_field_accuracy": {
         "summary.total_amount": 0.5,
         "invoice_number": 0.5

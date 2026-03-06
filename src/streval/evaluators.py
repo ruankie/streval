@@ -12,14 +12,15 @@ class StructuredExtractionEvaluator:
     # -------------------------
     def evaluate(
         self,
-        ground_truth: Union[Dict, BaseModel],
+        ground_truths: List[Union[Dict, BaseModel]],
         predictions: List[Union[Dict, BaseModel]],
     ) -> Dict[str, Any]:
-        """Evaluate multiple predictions against a single ground truth object.
+        """Evaluate paired ground truths and predictions across a dataset.
 
         Args:
-            ground_truth (Union[Dict, BaseModel]): The ground truth object.
-            predictions (List[Union[Dict, BaseModel]]): The list of prediction objects.
+            ground_truths (List[Union[Dict, BaseModel]]): The ground truth objects (y_true).
+            predictions (List[Union[Dict, BaseModel]]): The prediction objects (y_hat).
+                Must be the same length as ground_truths.
 
         Returns:
             Dict[str, Any]: The evaluation results, including:
@@ -28,24 +29,26 @@ class StructuredExtractionEvaluator:
                 - avg_field_accuracy (float): The average field accuracy.
                 - avg_object_accuracy (float): The average object accuracy.
                 - per_field_accuracy (Dict[str, float]): The per-field accuracy.
+
+        Raises:
+            ValueError: If ground_truths and predictions have different lengths.
         """
+        if len(ground_truths) != len(predictions):
+            raise ValueError(
+                f"ground_truths and predictions must have the same length, "
+                f"got {len(ground_truths)} and {len(predictions)}"
+            )
 
-        gt_dict = self._to_dict(ground_truth)
-        gt_flat = self._flatten(gt_dict)
-
-        all_results = []
         total_correct = 0
         total_fields = 0
         object_exact_matches = 0
+        per_field_counts: Dict[str, Dict[str, int]] = {}
 
-        per_field_counts = {}  # path -> {"correct": int, "total": int}
-
-        for pred in predictions:
-            pred_dict = self._to_dict(pred)
-            pred_flat = self._flatten(pred_dict)
+        for gt, pred in zip(ground_truths, predictions):
+            gt_flat = self._flatten(self._to_dict(gt))
+            pred_flat = self._flatten(self._to_dict(pred))
 
             result = self._compare_flat_dicts(gt_flat, pred_flat)
-            all_results.append(result)
 
             total_correct += result["correct_fields"]
             total_fields += result["total_fields"]
@@ -53,30 +56,23 @@ class StructuredExtractionEvaluator:
             if result["correct_fields"] == result["total_fields"]:
                 object_exact_matches += 1
 
-            # Aggregate per-field stats
             for path, is_correct in result["field_results"].items():
                 if path not in per_field_counts:
                     per_field_counts[path] = {"correct": 0, "total": 0}
-
                 per_field_counts[path]["correct"] += int(is_correct)
                 per_field_counts[path]["total"] += 1
 
-        field_accuracy = total_correct / total_fields if total_fields > 0 else 0.0
-        object_accuracy = (
-            object_exact_matches / len(predictions) if predictions else 0.0
-        )
-
-        per_field_accuracy = {
-            path: counts["correct"] / counts["total"]
-            for path, counts in per_field_counts.items()
-        }
+        nb_samples = len(predictions)
 
         return {
-            "avg_field_accuracy": field_accuracy,
-            "avg_object_accuracy": object_accuracy,
+            "avg_field_accuracy": total_correct / total_fields if total_fields > 0 else 0.0,
+            "avg_object_accuracy": object_exact_matches / nb_samples if nb_samples > 0 else 0.0,
+            "nb_samples": nb_samples,
             "total_fields_compared": total_fields,
-            "nb_samples": len(predictions),
-            "per_field_accuracy": per_field_accuracy,
+            "per_field_accuracy": {
+                path: counts["correct"] / counts["total"]
+                for path, counts in per_field_counts.items()
+            },
         }
 
     # -------------------------
