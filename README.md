@@ -1,7 +1,7 @@
 # Streval
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ruankie/streval/main/assets/logos/banner.png" alt="Streval" width="70%" />
+  <a href="https://ruankie.github.io/streval/"><img src="https://raw.githubusercontent.com/ruankie/streval/main/assets/logos/banner.png" alt="Streval" width="70%" /></a>
 </p>
 
 [![documentation](https://img.shields.io/badge/docs-mkdocs-708FCC.svg?style=flat)](https://ruankie.github.io/streval/)
