@@ -1,6 +1,6 @@
 [project]
 name = "streval"
-version = "0.2.0"
+version = "0.2.1"
 description = "Tool for evaluating structured outputs"
 readme = "README.md"
 authors = [
