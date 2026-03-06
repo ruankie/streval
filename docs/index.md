@@ -14,7 +14,8 @@ It allows you to **compare predicted structured objects** (Python dicts or Pydan
 * Penalizes **missing fields** in the prediction  
 * Penalizes **extra fields** not in the ground truth  
 * Handles nested dictionaries and lists recursively  
-* Accepts **Pydantic models or plain dicts** for both predictions and ground truth  
+* Accepts **Pydantic models or plain dicts** for both predictions and ground truth 
+* Supports **excluding specific fields and schema sections** from comparison 
 
 ---
 

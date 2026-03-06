@@ -14,6 +14,7 @@ class StructuredExtractionEvaluator:
         self,
         ground_truths: List[Union[Dict, BaseModel]],
         predictions: List[Union[Dict, BaseModel]],
+        exclude_fields: List[str] = None,
     ) -> Dict[str, Any]:
         """Evaluate paired ground truths and predictions across a dataset.
 
@@ -21,6 +22,9 @@ class StructuredExtractionEvaluator:
             ground_truths (List[Union[Dict, BaseModel]]): The ground truth objects (y_true).
             predictions (List[Union[Dict, BaseModel]]): The prediction objects (y_hat).
                 Must be the same length as ground_truths.
+            exclude_fields (List[str], optional): Dot-notation paths to exclude from
+                evaluation. Entire subsections can be excluded (e.g. "address" excludes
+                "address.street", "address.city", etc.). Defaults to None.
 
         Returns:
             Dict[str, Any]: The evaluation results, including:
@@ -33,20 +37,26 @@ class StructuredExtractionEvaluator:
         Raises:
             ValueError: If ground_truths and predictions have different lengths.
         """
+
         if len(ground_truths) != len(predictions):
             raise ValueError(
                 f"ground_truths and predictions must have the same length, "
                 f"got {len(ground_truths)} and {len(predictions)}"
             )
 
+        exclude_fields = exclude_fields or []
         total_correct = 0
         total_fields = 0
         object_exact_matches = 0
         per_field_counts: Dict[str, Dict[str, int]] = {}
 
         for gt, pred in zip(ground_truths, predictions):
-            gt_flat = self._flatten(self._to_dict(gt))
-            pred_flat = self._flatten(self._to_dict(pred))
+            gt_flat = self._exclude_fields(
+                self._flatten(self._to_dict(gt)), exclude_fields
+            )
+            pred_flat = self._exclude_fields(
+                self._flatten(self._to_dict(pred)), exclude_fields
+            )
 
             result = self._compare_flat_dicts(gt_flat, pred_flat)
 
@@ -65,10 +75,14 @@ class StructuredExtractionEvaluator:
         nb_samples = len(predictions)
 
         return {
-            "avg_field_accuracy": total_correct / total_fields if total_fields > 0 else 0.0,
-            "avg_object_accuracy": object_exact_matches / nb_samples if nb_samples > 0 else 0.0,
             "nb_samples": nb_samples,
             "total_fields_compared": total_fields,
+            "avg_field_accuracy": (
+                total_correct / total_fields if total_fields > 0 else 0.0
+            ),
+            "avg_object_accuracy": (
+                object_exact_matches / nb_samples if nb_samples > 0 else 0.0
+            ),
             "per_field_accuracy": {
                 path: counts["correct"] / counts["total"]
                 for path, counts in per_field_counts.items()
@@ -150,3 +164,18 @@ class StructuredExtractionEvaluator:
             items[parent_key] = obj
 
         return items
+
+    def _exclude_fields(
+        self,
+        flat_dict: Dict[str, Any],
+        excluded_fields: Union[List[str], None] = None,
+    ) -> Dict[str, Any]:
+        if not excluded_fields:
+            return flat_dict
+        return {
+            key: value
+            for key, value in flat_dict.items()
+            if not any(
+                key == excl or key.startswith(excl + ".") for excl in excluded_fields
+            )
+        }

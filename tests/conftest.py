@@ -55,3 +55,14 @@ def prediction_missing_items_gt1():
 @pytest.fixture
 def prediction_extra_items_gt1():
     return load_json(INVOICE_EXAMPLE_PATH / "predictions" / "extra_items_gt1.json")
+
+
+@pytest.fixture
+def nested_ground_truth():
+    return load_json(Path(__file__).parent / "files" / "nested" / "ground_truth.json")
+
+
+@pytest.fixture
+def nested_partially_correct_prediction():
+    return load_json(Path(__file__).parent / "files" / "nested" / "prediction.json")
+

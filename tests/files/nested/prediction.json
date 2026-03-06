@@ -1,0 +1,11 @@
+{
+    "order_id": "ORD-002",
+    "customer": {
+        "name": "Jane Doe",
+        "address": {
+            "city": "London",
+            "country": "UK"
+        }
+    },
+    "total": 125.86
+}
