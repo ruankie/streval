@@ -1,8 +1,8 @@
-# Getting Started
+# Examples
 
 This guide shows several minimal examples to get you started with Streval.
 
-## Excluding Fields
+## 1. Excluding Fields
 
 Sometimes you may want to exclude certain fields from evaluation. You can do this by passing dot-notation paths to the `exclude_fields` parameter.
 
@@ -58,7 +58,7 @@ results = evaluator.evaluate(
 }
 ```
 
-## Using Pydantic Models
+## 2. Using Pydantic Models
 
 ### Prepare Evaluation
 ```py
