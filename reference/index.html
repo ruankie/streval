@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../getting_started/">
+        <link rel="prev" href="../examples/">
       
       
       
@@ -231,6 +231,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -428,7 +455,7 @@
 
 
 <h2 id="streval.evaluators.StructuredExtractionEvaluator.evaluate" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">evaluate</span><span class="p">(</span><span class="n">ground_truths</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">evaluate</span><span class="p">(</span><span class="n">ground_truths</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">exclude_fields</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 </h2>
 
@@ -480,6 +507,24 @@ Must be the same length as ground_truths.</p>
             </td>
             <td>
                 <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>exclude_fields</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dot-notation paths to exclude from
+evaluation. Entire subsections can be excluded (e.g. "address" excludes
+"address.street", "address.city", etc.). Defaults to None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
             </td>
           </tr>
       </tbody>
