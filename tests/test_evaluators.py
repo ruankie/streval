@@ -1,3 +1,4 @@
+from this import d
 import pytest
 from streval.evaluators import StructuredExtractionEvaluator
 from files.invoice.schema import Invoice
@@ -235,5 +236,21 @@ def test_accepts_mixture_of_dict_and_pydantic_models(
         ground_truths=[ground_truth_1],
         predictions=[prediction_all_correct_pydantic],
     )
+    assert results["avg_field_accuracy"] == 1.0
+    assert results["avg_object_accuracy"] == 1.0
+
+
+def test_exclude_fields(nested_ground_truth, nested_partially_correct_prediction):
+    evaluator = StructuredExtractionEvaluator()
+    results = evaluator.evaluate(
+        ground_truths=[nested_ground_truth],
+        predictions=[nested_partially_correct_prediction],
+        # Exclude all incorrect fields to get perfect score
+        exclude_fields=[
+            "order_id",  # Leaf field
+            "customer.address",  # Section
+        ],
+    )
+
     assert results["avg_field_accuracy"] == 1.0
     assert results["avg_object_accuracy"] == 1.0
