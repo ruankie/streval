@@ -462,27 +462,37 @@
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">streval.evaluators</span><span class="w"> </span><span class="kn">import</span> <span class="n">StructuredExtractionEvaluator</span>
 
-<span class="c1"># Ground truth</span>
-<span class="n">ground_truth</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1"># Ground truths</span>
+<span class="c1">## Invoice 1</span>
+<span class="n">gt1</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;invoice_number&quot;</span><span class="p">:</span> <span class="s2">&quot;INV-001&quot;</span><span class="p">,</span>
     <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;total_amount&quot;</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">}</span>
 
+<span class="c1">## Invoice 2</span>
+<span class="n">gt2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;invoice_number&quot;</span><span class="p">:</span> <span class="s2">&quot;INV-002&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;total_amount&quot;</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
 <span class="c1"># Predictions</span>
-<span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s2">&quot;invoice_number&quot;</span><span class="p">:</span> <span class="s2">&quot;INV-001&quot;</span><span class="p">,</span> <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;total_amount&quot;</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">}},</span>  <span class="c1"># Correct</span>
-    <span class="p">{</span><span class="s2">&quot;invoice_number&quot;</span><span class="p">:</span> <span class="s2">&quot;001&quot;</span><span class="p">,</span> <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;total_amount&quot;</span><span class="p">:</span> <span class="mf">50.0</span><span class="p">}},</span>  <span class="c1"># Incorrect</span>
-<span class="p">]</span>
+<span class="c1">## Invoice 1 (correct)</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;invoice_number&quot;</span><span class="p">:</span> <span class="s2">&quot;INV-001&quot;</span><span class="p">,</span> <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;total_amount&quot;</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">}}</span>
+
+<span class="c1">## Invoice 2 (incorrect)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;invoice_number&quot;</span><span class="p">:</span> <span class="s2">&quot;INV-001&quot;</span><span class="p">,</span> <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;total_amount&quot;</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">}}</span>
 
 <span class="c1"># Initialize evaluator</span>
 <span class="n">evaluator</span> <span class="o">=</span> <span class="n">StructuredExtractionEvaluator</span><span class="p">()</span>
 
 <span class="c1"># Run evaluation</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
-    <span class="n">ground_truth</span><span class="o">=</span><span class="n">ground_truth</span><span class="p">,</span>
-    <span class="n">predictions</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span>
+    <span class="n">ground_truths</span><span class="o">=</span><span class="p">[</span><span class="n">gt1</span><span class="p">,</span> <span class="n">gt2</span><span class="p">],</span>
+    <span class="n">predictions</span><span class="o">=</span><span class="p">[</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">],</span>
 <span class="p">)</span>
 </code></pre></div>
 </div>
@@ -501,27 +511,33 @@
     <span class="n">summary</span><span class="p">:</span> <span class="n">SpendSummary</span>
 
 
-<span class="c1"># Ground truth</span>
-<span class="n">ground_truth</span> <span class="o">=</span> <span class="n">Invoice</span><span class="p">(</span>
+<span class="c1"># Ground truths</span>
+<span class="c1">## Invoice 1</span>
+<span class="n">gt1</span> <span class="o">=</span> <span class="n">Invoice</span><span class="p">(</span>
     <span class="n">invoice_number</span><span class="o">=</span><span class="s2">&quot;INV-001&quot;</span><span class="p">,</span>
     <span class="n">summary</span><span class="o">=</span><span class="n">SpendSummary</span><span class="p">(</span><span class="n">total_amount</span><span class="o">=</span><span class="mf">100.0</span><span class="p">),</span>
 <span class="p">)</span>
 
+<span class="c1">## Invoice 2</span>
+<span class="n">gt2</span> <span class="o">=</span> <span class="n">Invoice</span><span class="p">(</span>
+    <span class="n">invoice_number</span><span class="o">=</span><span class="s2">&quot;INV-002&quot;</span><span class="p">,</span>
+    <span class="n">summary</span><span class="o">=</span><span class="n">SpendSummary</span><span class="p">(</span><span class="n">total_amount</span><span class="o">=</span><span class="mf">200.0</span><span class="p">),</span>
+<span class="p">)</span>
+
 <span class="c1"># Predictions</span>
-<span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">Invoice</span><span class="p">(</span>
-        <span class="n">invoice_number</span><span class="o">=</span><span class="s2">&quot;INV-001&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="n">SpendSummary</span><span class="p">(</span><span class="n">total_amount</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>
-    <span class="p">),</span>  <span class="c1"># Correct</span>
-    <span class="n">Invoice</span><span class="p">(</span><span class="n">invoice_number</span><span class="o">=</span><span class="s2">&quot;001&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="n">SpendSummary</span><span class="p">(</span><span class="n">total_amount</span><span class="o">=</span><span class="mf">50.0</span><span class="p">)),</span>  <span class="c1"># Incorrect</span>
-<span class="p">]</span>
+<span class="c1">## Invoice 1 (correct)</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Invoice</span><span class="p">(</span><span class="n">invoice_number</span><span class="o">=</span><span class="s2">&quot;INV-001&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="n">SpendSummary</span><span class="p">(</span><span class="n">total_amount</span><span class="o">=</span><span class="mf">100.0</span><span class="p">))</span>
+
+<span class="c1">## Invoice 2 (incorrect)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Invoice</span><span class="p">(</span><span class="n">invoice_number</span><span class="o">=</span><span class="s2">&quot;001&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="n">SpendSummary</span><span class="p">(</span><span class="n">total_amount</span><span class="o">=</span><span class="mf">50.0</span><span class="p">))</span>
 
 <span class="c1"># Initialize evaluator</span>
 <span class="n">evaluator</span> <span class="o">=</span> <span class="n">StructuredExtractionEvaluator</span><span class="p">()</span>
 
 <span class="c1"># Run evaluation</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
-    <span class="n">ground_truth</span><span class="o">=</span><span class="n">ground_truth</span><span class="p">,</span>
-    <span class="n">predictions</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span>
+    <span class="n">ground_truths</span><span class="o">=</span><span class="p">[</span><span class="n">gt1</span><span class="p">,</span> <span class="n">gt2</span><span class="p">],</span>
+    <span class="n">predictions</span><span class="o">=</span><span class="p">[</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">],</span>
 <span class="p">)</span>
 </code></pre></div>
 </div>
@@ -531,8 +547,8 @@
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;avg_field_accuracy&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;avg_object_accuracy&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;total_fields_compared&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;nb_samples&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;total_fields_compared&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;per_field_accuracy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;summary.total_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;invoice_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span>

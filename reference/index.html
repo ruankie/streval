@@ -428,14 +428,14 @@
 
 
 <h2 id="streval.evaluators.StructuredExtractionEvaluator.evaluate" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">evaluate</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">evaluate</span><span class="p">(</span><span class="n">ground_truths</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span></code>
 
 </h2>
 
 
     <div class="doc doc-contents ">
 
-        <p>Evaluate multiple predictions against a single ground truth object.</p>
+        <p>Evaluate paired ground truths and predictions across a dataset.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -451,14 +451,14 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                <code>ground_truth</code>
+                <code>ground_truths</code>
             </td>
             <td>
-                  <code><span title="typing.Union">Union</span>[<span title="typing.Dict">Dict</span>, <span title="pydantic.BaseModel">BaseModel</span>]</code>
+                  <code><span title="typing.List">List</span>[<span title="typing.Union">Union</span>[<span title="typing.Dict">Dict</span>, <span title="pydantic.BaseModel">BaseModel</span>]]</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The ground truth object.</p>
+                <p>The ground truth objects (y_true).</p>
               </div>
             </td>
             <td>
@@ -474,7 +474,8 @@
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The list of prediction objects.</p>
+                <p>The prediction objects (y_hat).
+Must be the same length as ground_truths.</p>
               </div>
             </td>
             <td>
@@ -506,6 +507,29 @@
 - avg_field_accuracy (float): The average field accuracy.
 - avg_object_accuracy (float): The average object accuracy.
 - per_field_accuracy (Dict[str, float]): The per-field accuracy.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="ValueError">ValueError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If ground_truths and predictions have different lengths.</p>
               </div>
             </td>
           </tr>
