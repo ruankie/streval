@@ -24,7 +24,6 @@ Please refer to the [docs](https://ruankie.github.io/streval/) for more details.
 * Accepts **Pydantic models or plain dicts** for both predictions and ground truth  
 * Supports **excluding specific fields and schema sections** from comparison
 
----
 
 ## Installation
 
@@ -36,7 +35,6 @@ pip install streval
 
 Please refer to the [docs](https://ruankie.github.io/streval/) for more usage examples.
 
----
 
 ## How it Works
 
