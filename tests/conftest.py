@@ -13,30 +13,45 @@ def load_json(path: Path) -> dict:
 
 
 @pytest.fixture
-def ground_truth():
-    return load_json(INVOICE_EXAMPLE_PATH / "ground_truth.json")
+def ground_truth_1():
+    return load_json(INVOICE_EXAMPLE_PATH / "ground_truth_1.json")
 
 
 @pytest.fixture
-def prediction_all_correct():
-    return load_json(INVOICE_EXAMPLE_PATH / "predictions" / "all_correct.json")
+def ground_truth_2():
+    return load_json(INVOICE_EXAMPLE_PATH / "ground_truth_2.json")
 
 
 @pytest.fixture
-def prediction_all_incorrect():
-    return load_json(INVOICE_EXAMPLE_PATH / "predictions" / "all_incorrect.json")
+def prediction_all_correct_gt1():
+    return load_json(INVOICE_EXAMPLE_PATH / "predictions" / "all_correct_gt1.json")
 
 
 @pytest.fixture
-def prediction_half_correct():
-    return load_json(INVOICE_EXAMPLE_PATH / "predictions" / "half_correct.json")
+def prediction_all_correct_gt2():
+    return load_json(INVOICE_EXAMPLE_PATH / "predictions" / "all_correct_gt2.json")
 
 
 @pytest.fixture
-def prediction_missing_items():
-    return load_json(INVOICE_EXAMPLE_PATH / "predictions" / "missing_items.json")
+def prediction_all_incorrect_gt1():
+    return load_json(INVOICE_EXAMPLE_PATH / "predictions" / "all_incorrect_gt1.json")
 
 
 @pytest.fixture
-def prediction_extra_items():
-    return load_json(INVOICE_EXAMPLE_PATH / "predictions" / "extra_items.json")
+def prediction_all_incorrect_gt2():
+    return load_json(INVOICE_EXAMPLE_PATH / "predictions" / "all_incorrect_gt2.json")
+
+
+@pytest.fixture
+def prediction_half_correct_gt1():
+    return load_json(INVOICE_EXAMPLE_PATH / "predictions" / "half_correct_gt1.json")
+
+
+@pytest.fixture
+def prediction_missing_items_gt1():
+    return load_json(INVOICE_EXAMPLE_PATH / "predictions" / "missing_items_gt1.json")
+
+
+@pytest.fixture
+def prediction_extra_items_gt1():
+    return load_json(INVOICE_EXAMPLE_PATH / "predictions" / "extra_items_gt1.json")
