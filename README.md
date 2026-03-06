@@ -1,5 +1,9 @@
 # Streval
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ruankie/streval/main/assets/logos/banner.png" alt="Streval" width="70%" />
+</p>
+
 [![documentation](https://img.shields.io/badge/docs-mkdocs-708FCC.svg?style=flat)](https://ruankie.github.io/streval/)
 [![pypi version](https://img.shields.io/pypi/v/streval.svg)](https://pypi.org/project/streval/)
 [![GitHub stars](https://img.shields.io/github/stars/ruankie/streval)](https://github.com/ruankie/streval/stargazers)
